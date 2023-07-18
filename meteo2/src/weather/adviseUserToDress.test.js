@@ -27,3 +27,14 @@ test("Render the temperature and raining over 18°", () => {
     screen.getByText("La température est de: 40°, Le ciel: il pleut pas"),
   ).toBeInTheDocument();
 });
+
+test("Render the temperature and raining over 18°", () => {
+    getWeather.mockReturnValue({ temperature: 4, raining: true});
+  render(<AdviseUserToDress />);
+  expect(
+    screen.getByText("La température est de: 4°, Le ciel: il pleut"),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText("Selon la température ci-dessus tu dois mettre un Doudoune et un bonet"),
+  ).toBeInTheDocument();
+});
