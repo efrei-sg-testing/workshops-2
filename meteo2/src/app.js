@@ -69,13 +69,22 @@ function outfits(currentweather) {
 
 
 
-
 export function App() {
 
     const currentweather = getWeather()
 
 
+    const handleClickTemperature = (e) => {
 
+        e.target.value == "C" && setDisplayTemperature(temperature) && setDisplayTemperatureSymbol("C")
+        e.target.value == "F" && setDisplayTemperature(temperatureFarenheit) && setDisplayTemperatureSymbol("F")
+        e.target.value == "K" && setDisplayTemperature(temperatureKelvin) && setDisplayTemperatureSymbol("K")
+
+        e.target.value == "C" && setDisplayTemperatureSymbol("C")
+        e.target.value == "F" && setDisplayTemperatureSymbol("F")
+        e.target.value == "K" && setDisplayTemperatureSymbol("K")
+
+    };
 
     const temperatureFarenheit = (currentweather.temperature * 3 / 5) + 32
 
@@ -88,14 +97,14 @@ export function App() {
     const outfit = outfits(currentweather)
 
     const [displayTemperature, setDisplayTemperature] = useState(temperature)
-
+    const [displayTemperatureSymbol, setDisplayTemperatureSymbol] = useState("C")
     return (
 
         <>
 
             <h2>
 
-                Bonjour, il fait {displayTemperature} °C et {currentweather.raining ? "il pleut" : "il fait beau"}
+                Bonjour, il fait {displayTemperature} {displayTemperatureSymbol} et {currentweather.raining ? "il pleut" : "il fait beau"}
 
 
 
@@ -112,11 +121,11 @@ export function App() {
 
             <div>
 
-                <button onClick={(event) => setDisplayTemperature(temperature)}>Celsius</button>
+                <button value="C" onClick={handleClickTemperature}>Celsius</button>
 
-                <button onClick={(event) => setDisplayTemperature(temperatureFarenheit)}>Fahrenheit</button>
+                <button value="F" onClick={handleClickTemperature}>Fahrenheit</button>
 
-                <button onClick={(event) => setDisplayTemperature(temperatureKelvin)}>Kelvins</button>
+                <button value="K" onClick={handleClickTemperature}>Kelvins</button>
 
             </div>
 
